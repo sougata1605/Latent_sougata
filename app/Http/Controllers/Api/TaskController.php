@@ -8,21 +8,19 @@ use App\Http\Resources\TaskResource;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
+use App\Http\Controllers\Api\Response;
 
 class TaskController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        $tasks = Task::when($request->status, function ($q) use ($request) {
-            $q->where('status', $request->status);
-        })->paginate(10);
-
-        return TaskResource::collection($tasks);
+        return TaskResource::collection(Task::latest()->get());
     }
 
     public function store(StoreTaskRequest $request)
     {
         $task = Task::create($request->validated());
+
         return new TaskResource($task);
     }
 
@@ -34,12 +32,14 @@ class TaskController extends Controller
     public function update(UpdateTaskRequest $request, Task $task)
     {
         $task->update($request->validated());
+
         return new TaskResource($task);
     }
 
     public function destroy(Task $task)
     {
         $task->delete();
-        return response()->json(['message' => 'Task deleted']);
+
+        return response()->json(null, 204);
     }
 }
