@@ -1,4 +1,5 @@
-import { createApp } from 'vue'
-import TaskApp from './components/TaskApp.vue'
 
-createApp(TaskApp).mount('#app')
+import { createApp } from 'vue';
+import TaskApp from './components/TaskApp.vue';
+
+createApp(TaskApp).mount('#app');
