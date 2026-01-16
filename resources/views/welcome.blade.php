@@ -1,10 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Task App</title>
     @vite('resources/js/app.js')
 </head>
 <body>
+
+<div class="container">
     <div id="app"></div>
+</div>
+
 </body>
 </html>
